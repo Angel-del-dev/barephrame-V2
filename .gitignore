@@ -1,3 +1,6 @@
 pages/*
 src/Cache/routes.cache.php
 .env
+
+domains/*
+http/*
