@@ -11,4 +11,11 @@ When calling `exec.php`, there's two types of flags.
 # and pre-cache all the routes
 */exec.php --cache-routes
 ```
+
+```bash
+# Used to generate the required structure
+# to work correctly, Must use only after fresh
+# install
+*/exec.php --scaffold
+```
 ## Flags with values
