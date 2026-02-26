@@ -1,7 +1,7 @@
-Fullstack PHP & Javascript server
+# Barephrame V2
+*A minimal PHP fullstack framework without dependecies*
 
-# Backend
-- [X] Route caching based on PHP 8+ attributes
-- [X] Version caching based on #[Version(n)]
-- [X] CLI tool to automate tasks
-- [ ] Route caching Middleware as a parameter
+Links:
+* [Documentation](./docs/Index.md)
+* [TODO for the current version](./todo.md)
+* [Roadmap](./roadmap.md)
