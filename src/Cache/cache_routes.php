@@ -102,8 +102,6 @@ foreach($iterator as $file) {
 $export = var_export($cached_routes, true);
 $export = preg_replace('/\s+/', ' ', $export);
 $export = preg_replace('/\s*,\s*/', ', ', $export);
-
-
 $content = "<?php\n\nreturn " . $export . ";\n";
 
 file_put_contents(__DIR__ . '/routes.cache.php', $content);

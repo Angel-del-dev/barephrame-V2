@@ -19,3 +19,10 @@ When calling `exec.php`, there's two types of flags.
 */exec.php --scaffold
 ```
 ## Flags with values
+```bash
+# Used to generate a full code structures
+# including the files with the boilerplate code
+# Types of structures:
+# Domain
+*/exec.php --make {type} {name}
+```

@@ -16,10 +16,10 @@ function make(string $name):void {
     ];
 
     $check_or_create_files = [
-        "/domains/{$name}/{$name}.service.php" => 'TEST CONTENT',
-        "/domains/{$name}/{$name}.repository.php" => 'TEST CONTENT',
-        "/domains/{$name}/{$name}.php" => 'TEST CONTENT',
-        "/http/controllers/{$name}.controller.php" => 'TEST CONTENT'
+        "/domains/{$name}/{$name}Service.php" => sprintf("<?php\nnamespace domains\%s;\nfinal class {$name}Service{}", $name),
+        "/domains/{$name}/{$name}Repository.php" => sprintf("<?php\nnamespace domains\%s;\nfinal class {$name}Repository{}", $name),
+        "/domains/{$name}/{$name}.php" => sprintf("<?php\nnamespace domains\%s;\nfinal class {$name}{}", $name),
+        "/http/controllers/{$name}Controller.php" => "<?php\nnamespace http\controllers;\nclass {$name}Controller {}"
     ];
 
     foreach($check_or_create_folders as $folder) {
