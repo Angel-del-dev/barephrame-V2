@@ -8,15 +8,12 @@ function make(string $name):void {
     }
 
     $check_or_create_folders = [
-        '/domains',
-        "/domains/{$name}",
-        "/domains/{$name}/DTOs"
+        '/http',
+        '/http/controllers'
     ];
 
     $check_or_create_files = [
-        "/domains/{$name}/{$name}Service.php" => sprintf("<?php\nnamespace domains\%s;\nfinal class {$name}Service{}", $name),
-        "/domains/{$name}/{$name}Repository.php" => sprintf("<?php\nnamespace domains\%s;\nfinal class {$name}Repository{}", $name),
-        "/domains/{$name}/{$name}.php" => sprintf("<?php\nnamespace domains\%s;\nfinal class {$name}{}", $name)
+        "/http/controllers/{$name}Controller.php" => "<?php\nnamespace http\controllers;\nclass {$name}Controller {}"
     ];
 
     foreach($check_or_create_folders as $folder) {
