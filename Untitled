@@ -1,2 +1,0 @@
-lace('/\s+/', ' ', $export);
-    $export = preg_repla
