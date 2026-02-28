@@ -18,6 +18,10 @@ class ResponseRenderer {
         if($this->response->retry_after > 0) {
             header("Retry-After: {$this->response->retry_after}");
         }
+
+        if(trim($this->response->content_type) !== '') {
+            header("Content-Type: {$this->response->content_type}");
+        }
         
         if(trim($this->response->data) !== '') {
             echo $this->response->data;

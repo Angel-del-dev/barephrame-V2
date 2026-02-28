@@ -7,7 +7,8 @@ final class Response {
         public int $status = 200,
         public string $message = 'OK',
         public string $data = '',
-        public int $retry_after = 0
+        public int $retry_after = 0,
+        public string $content_type = 'application/json'
     ) {}
     public function status(int $status, string $message):Response {
         $this->status = $status;
@@ -20,8 +21,14 @@ final class Response {
         return $this;
     }
 
-    // Rate limiting header
+    public function set_content_type(string $content_type):Response {
+        $this->content_type = $content_type;
+        return $this;
+    }
+
+    // Rate limiting
     public function set_retry_after(int $seconds) {
         $this->retry_after = $seconds;
+        return $this;
     }
 }
