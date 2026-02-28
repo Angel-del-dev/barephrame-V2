@@ -7,9 +7,7 @@ require_once("../src/autoload.php");
 use src\Router\Router;
 
 try {
-    new Router()->redirect();
+    $response = new Router()->redirect();
 } catch(Throwable $e) {
-    // Proper error handling
-    print_r('<pre>');
     print_r($e->getMessage());
 }

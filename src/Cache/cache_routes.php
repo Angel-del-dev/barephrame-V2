@@ -38,7 +38,10 @@ foreach($iterator as $file) {
     $file_name = $file->getFileName();
     $parts = explode('.', $file_name);
 
-    $http_method = strtoupper($parts[count($parts) - 2] ?? 'GET');
+    $http_method = 'GET';
+    if(count($parts) >= 3) {
+        $http_method = strtoupper($parts[count($parts) - 2]);
+    }
     $defined_functions_before = get_defined_functions()['user'];
 
     $real_path = $file->getRealPath();
