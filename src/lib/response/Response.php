@@ -27,7 +27,7 @@ final class Response {
     }
 
     // Rate limiting
-    public function set_retry_after(int $seconds) {
+    public function set_retry_after(int $seconds):Response {
         $this->retry_after = $seconds;
         return $this;
     }

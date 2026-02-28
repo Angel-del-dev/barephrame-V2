@@ -52,6 +52,36 @@ The allowed method is dependant on the extension of the file.
 *.options.php
 ```
 
+# Parameters
+
+One parameter is always given to the endpoint, which is the `Request` object and its always the last parameter.
+
+## Request object
+```php
+use src\lib\request\Request;
+```
+The request object contains various bits of information, from `headers` to `parameters`.
+It is not necessary to consume this object in an endpoint if its not needed.
+```php
+function index(Request $req); // This will work
+function index(); // This will also work
+```
+
+## Dynamic parameters
+```php
+
+/*
+    When routes contain dynamic parameters, they  
+    will be passed to the endpoint function  
+    in order with the same data type
+*/
+#[Route('/users/{code:int}')]
+function index(int $code, Request $req);
+
+#[Route('/users/{code:string}')]
+function index(string $code, Request $req);
+```
+
 # Full example
 
 ```php
