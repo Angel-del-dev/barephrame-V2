@@ -19,6 +19,9 @@ require_once(__DIR__.'/../autoload.php');
 
 use src\Attributes\Route;
 use src\Attributes\Version;
+use src\lib\parse\Environment;
+
+$env = Environment::get();
 
 echo "Finding files in: '{$base_pages_path}'\n";
 
@@ -100,8 +103,10 @@ foreach($iterator as $file) {
 }
 
 $export = var_export($cached_routes, true);
-$export = preg_replace('/\s+/', ' ', $export);
-$export = preg_replace('/\s*,\s*/', ', ', $export);
+if($env->PRODUCTION) {
+    $export = preg_replace('/\s+/', ' ', $export);
+    $export = preg_replace('/\s*,\s*/', ', ', $export);
+}
 $content = "<?php\n\nreturn " . $export . ";\n";
 
 file_put_contents(__DIR__ . '/routes.cache.php', $content);
