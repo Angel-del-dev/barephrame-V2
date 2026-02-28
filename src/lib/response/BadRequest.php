@@ -4,10 +4,10 @@ namespace src\lib\response;
 use src\Contracts\ResponseInterface;
 
 
-final class MethodNotAllowed implements ResponseInterface {
+final class BadRequest implements ResponseInterface {
     public function send():Response {
         $response = new Response()
-            ->status(405, 'Method Not Allowed');
+            ->status(400, 'Bad Request');
         return $response;
     }
 }

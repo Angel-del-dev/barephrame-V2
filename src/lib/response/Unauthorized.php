@@ -4,10 +4,10 @@ namespace src\lib\response;
 use src\Contracts\ResponseInterface;
 
 
-final class MethodNotAllowed implements ResponseInterface {
+final class Unauthorized implements ResponseInterface {
     public function send():Response {
         $response = new Response()
-            ->status(405, 'Method Not Allowed');
+            ->status(401, 'Unauthorized');
         return $response;
     }
 }
