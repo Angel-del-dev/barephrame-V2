@@ -53,6 +53,15 @@ class Router {
             require_once($file);
         }
 
+        $response = new Response();
+        foreach($configuration['middlewares'] as $middleware) {
+            $middleware_definition = new $middleware();
+            $response = $middleware_definition->handle($this->request, $response);
+            if($response->status !== 200) {
+                return $response;
+            }
+        }
+
         $parameters[] = $this->request;
         $response = call_user_func('\\'.$configuration['action'], ...$parameters);
         if(!$response instanceof Response) {
