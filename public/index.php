@@ -1,18 +1,22 @@
 <?php
 
+require_once("../Barephrame/autoload.php");
+
+use Barephrame\Core\Response\Common\InternalServerError;
 use Barephrame\Core\Router\Router;
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(-1);
 
-require_once("../Barephrame/autoload.php");
+$response = null;
 
 try {
     $response = new Router()->redirect();
-
-    print_r($response);
-    exit;
 } catch(Throwable $e) {
-    print_r($e->getMessage()); // TODO Better exceptions
+    $response = InternalServerError::send();
+    // TODO Add error to log
 }
+
+print_r($response);
+exit;
