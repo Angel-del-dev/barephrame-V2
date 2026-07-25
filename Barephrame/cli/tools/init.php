@@ -3,11 +3,11 @@
 function CreateProjectStructure() {
     $root = __DIR__.'/../../..';
     
-    $checkOrCreateFolders = ['App', 'Domains'];
+    $checkOrCreateFolders = ['App', 'Domains', 'public'];
     $checkOrCreateFiles = [
         'app.ini' => "[Database]\nHOST = \nUSER = \nPASSWORD = \nPORT = \nNAME = ",
-        '/public/.htaccess' => "<IfModule mod_rewrite.c>\nOptions +FollowSymLinks\nRewriteEngine On\nRewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule ^ index.php [L]\n</IfModule>",
-        '/public/index.php' => '' // TODO Add index.php contents
+        'public/.htaccess' => "<IfModule mod_rewrite.c>\nOptions +FollowSymLinks\nRewriteEngine On\nRewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule ^ index.php [L]\n</IfModule>",
+        'public/index.php' => '' // TODO Add index.php contents
     ];
 
     foreach($checkOrCreateFolders as $folder) {
