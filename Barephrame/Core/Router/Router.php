@@ -31,9 +31,6 @@ class Router {
         $parameters = [];
 
         foreach($endpoint as $jump) {
-            if(trim($jump) === '') {
-                return BadRequest::send();
-            }
             // If the endpoint chunk doesn't exist, it might mean there's a 
             // dynamic parameter
             if(!isset($selectedRoute[$jump])) {
