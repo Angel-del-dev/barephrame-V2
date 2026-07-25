@@ -38,6 +38,31 @@ $allowed_flags = [
     'compile-routes' => function(array $_) use($toolsRootPath):void {
         require_once($toolsRootPath.'/compile-routes.php');
         CompileRoutes();
+    },
+    'watch' => function(array $_) use($toolsRootPath):void {
+        $rootEndpoints = __DIR__.'/../../App';
+
+        $last = filemtime($rootEndpoints);
+
+        require_once($toolsRootPath.'/compile-routes.php');
+
+        while(true) {        
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($rootEndpoints, FilesystemIterator::SKIP_DOTS)
+            );
+
+            $scanLast = $last;
+
+            foreach ($iterator as $file) {
+                $scanLast = max($scanLast, $file->getMTime());
+            }
+            if($last < $scanLast) {
+                CompileRoutes();
+                $last = $scanLast;
+            }
+            sleep(1);
+        }
+        print_r($toolsRootPath);
     }
 ];
 
