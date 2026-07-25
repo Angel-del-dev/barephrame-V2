@@ -5,6 +5,8 @@ if(php_sapi_name() !== 'cli') {
 }
 
 $flags = [];
+$toolsRootPath = __DIR__.'/tools';
+
 
 // Group flag names with their values
 
@@ -26,8 +28,13 @@ for($i = 1 ; $i < $argc ; $i++) {
     }
 }
 
-$allowed_flags = [
+// Flag execution
 
+$allowed_flags = [
+    'init' => function(array $_) use($toolsRootPath) :void {
+        require_once($toolsRootPath.'/init.php');
+        CreateProjectStructure();
+    }
 ];
 
 foreach($flags as $flag) {
