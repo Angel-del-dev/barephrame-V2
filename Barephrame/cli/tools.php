@@ -1,0 +1,39 @@
+<?php
+
+if(php_sapi_name() !== 'cli') {
+    exit('This script is CLI only');
+}
+
+$flags = [];
+
+// Group flag names with their values
+
+$current_flag_position = -1;
+
+for($i = 1 ; $i < $argc ; $i++) {
+    $argument = $argv[$i];
+
+    $isArgumentName = substr($argument, 0, 2) === '--';
+    if($isArgumentName) {
+        $flag = new stdClass();
+        $flag->name = substr($argument, 2);
+        $flag->values = [];
+        $flags[] = $flag;
+        $current_flag_position++;
+    } else {
+        if(count($flags) === 0) continue;
+        $flags[$current_flag_position]->values[] = $argument;
+    }
+}
+
+$allowed_flags = [
+
+];
+
+foreach($flags as $flag) {
+    if(!isset($allowed_flags[$flag->name])) {
+        echo sprintf("Flag --%s not available\n", $flag->name);
+        break;
+    }
+    $allowed_flags[$flag->name]($flag->values);
+}
