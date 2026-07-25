@@ -31,9 +31,13 @@ for($i = 1 ; $i < $argc ; $i++) {
 // Flag execution
 
 $allowed_flags = [
-    'init' => function(array $_) use($toolsRootPath) :void {
+    'init' => function(array $_) use($toolsRootPath):void {
         require_once($toolsRootPath.'/init.php');
         CreateProjectStructure();
+    },
+    'compile-routes' => function(array $_) use($toolsRootPath):void {
+        require_once($toolsRootPath.'/compile-routes.php');
+        CompileRoutes();
     }
 ];
 
