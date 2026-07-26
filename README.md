@@ -8,6 +8,9 @@ efficient `API` development
 + ✉️ Its own Email service
 + 🚄 Fast response times
 
+# 🚗 Getting started?
+[Check our documentation](./docs/Index.md)
+
 # 🚀 Philosophy
 Barephrame is built around a simple idea:
 > It shouldn't be required to load thousands
