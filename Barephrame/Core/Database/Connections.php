@@ -12,14 +12,19 @@ final class Connections {
     protected static array $connections = [];
 
     public static function connect(
-        string $host, string $name, 
+        string $key, string $host, string $name, 
         string $user, string $password,
         int $port, DatabaseTypes $type
     ):Connection 
     {
+        if(self::isConnected($key)) {
+            throw new Exception("Database with alias '{$key}' is already connected");
+        }
+        
         $engine = self::getEngineFromType($type);
 
         $engine->createConnection($host, $name, $user, $password, $port);
+        self::$connections[$key] = $engine;
         return $engine;
     }
 
@@ -45,7 +50,7 @@ final class Connections {
 
         $section = Environment::getSection('Database');
         $port = intval($section['PORT']) ?? 0;
-        return self::connect(
+        return self::connect('main',
             $section['HOST'], $section['NAME'],
             $section['USER'], $section['PASSWORD'],
             $port, $type
