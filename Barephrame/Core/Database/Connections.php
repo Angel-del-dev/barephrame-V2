@@ -5,6 +5,7 @@ namespace Barephrame\Core\Database;
 use Barephrame\Core\Database\Languages\Firebird;
 use Barephrame\Core\Database\Languages\Mysql;
 use Barephrame\Core\Database\Languages\Postgres;
+use Barephrame\Core\Files\Environment;
 use Exception;
 
 final class Connections {
@@ -13,21 +14,22 @@ final class Connections {
     public static function connect(
         string $host, string $name, 
         string $user, string $password,
-        DatabaseTypes $type
-    ):void 
+        int $port, DatabaseTypes $type
+    ):Connection 
     {
         $engine = self::getEngineFromType($type);
-        print_r($type);
-        exit;
+
+        $engine->createConnection($host, $name, $user, $password, $port);
+        return $engine;
     }
 
-    public static function use(string $key):void
+    public static function use(string $key):Connection
     {
         if(!self::isConnected($key)) {
             throw new Exception("Database alias '{$key}' does not exist");
         }
 
-        // TODO Return connection
+        return self::$connections[$key];
     }
 
     public static function isConnected(string $key):bool
@@ -35,10 +37,22 @@ final class Connections {
         return isset(self::$connections[$key]);
     }
 
-    public static function mainConnection(string $key, DatabaseTypes $type):void
-    {}
+    public static function mainConnection(DatabaseTypes $type):Connection
+    {
+        if(self::isConnected('main')) {
+            return self::use('main');
+        }
 
-    protected static function getEngineFromType(DatabaseTypes $type)
+        $section = Environment::getSection('Database');
+        $port = intval($section['PORT']) ?? 0;
+        return self::connect(
+            $section['HOST'], $section['NAME'],
+            $section['USER'], $section['PASSWORD'],
+            $port, $type
+        );
+    }
+
+    protected static function getEngineFromType(DatabaseTypes $type):Connection
     {
         $engines = [
             DatabaseTypes::MYSQL->name => Mysql::class,
@@ -50,6 +64,6 @@ final class Connections {
             throw new Exception("Database engine '{$type->name}' not supported");           
         }
 
-        return $engines[$type->name];
+        return new $engines[$type->name]();
     }
 }
