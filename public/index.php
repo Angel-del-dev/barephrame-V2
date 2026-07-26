@@ -3,6 +3,7 @@
 require_once("../Barephrame/autoload.php");
 
 use Barephrame\Core\Response\Common\InternalServerError;
+use Barephrame\Core\Response\Renderer;
 use Barephrame\Core\Router\Router;
 
 ini_set('display_errors', '1');
@@ -18,5 +19,4 @@ try {
     // TODO Add error to log
 }
 
-print_r($response);
-exit;
+Renderer::send($response);
