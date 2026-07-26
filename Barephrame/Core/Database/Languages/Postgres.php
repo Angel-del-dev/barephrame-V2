@@ -5,7 +5,6 @@ namespace Barephrame\Core\Database\Languages;
 use Barephrame\Core\Database\Connection;
 use Override;
 use PDO;
-use PDOException;
 
 class Postgres extends Connection {
     public function __construct()
@@ -14,8 +13,11 @@ class Postgres extends Connection {
     }
 
     #[Override]
-    public function createConnection(string $host, string $name, string $user, string $password, int $port = 0)
-    {
+    public function createConnection(
+        string $host, string $name, 
+        string $user, string $password, 
+        int $port = 0
+    ) {
         if($port === 0) {
             $port = 5432;
         }
