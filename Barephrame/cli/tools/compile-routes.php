@@ -47,6 +47,7 @@ function CompileRoutes():void {
                 $attributeMethod = $method->getAttributes(Method::class);
                 $attributeVersion = $method->getAttributes(Version::class);
                 $attributeRoute = $method->getAttributes(Route::class);
+                if(count($attributeMethod) === 0) continue;
 
                 $httpMethod = $attributeMethod[0]->newInstance()->method ?? 'GET';
                 $version = null;

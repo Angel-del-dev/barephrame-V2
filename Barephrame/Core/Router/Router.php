@@ -3,7 +3,6 @@
 namespace Barephrame\Core\Router;
 
 use Barephrame\Core\Request\Request;
-use Barephrame\Core\Response\Common\BadRequest;
 use Barephrame\Core\Response\Common\MethodNotAllowed;
 use Barephrame\Core\Response\Common\NotFound;
 use Barephrame\Core\Response\Response;
@@ -69,7 +68,7 @@ class Router {
         }
 
         foreach($configuration['middleware'] as $middleware) {
-            $response = new $middleware()->handle($this->request);
+            $response = new $middleware()->validate($this->request);
             if($response->status !== 200) {
                 return $response;
             }
