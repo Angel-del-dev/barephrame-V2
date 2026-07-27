@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Common HTTP response types and structured error responses.
 - API response renderer for consistent output formatting.
 - Engine-agnostic database connection layer with support for multiple database engines.
+- Full middleware support before calling any controller
 - Apache License 2.0.
 
 ### Fixed
