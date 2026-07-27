@@ -6,5 +6,5 @@ use Barephrame\Core\Request\Request;
 use Barephrame\Core\Response\Response;
 
 interface IMiddleware {
-    public function handle(Request $request):Response;
+    public function validate(Request $request):Response;
 }
