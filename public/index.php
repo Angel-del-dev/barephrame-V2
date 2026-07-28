@@ -17,7 +17,7 @@ try {
     $response = new Router()->redirect();
 } catch(Throwable $e) {
     $response = InternalServerError::send();
-    Log::store('Error', sprintf(
+    Log::error(sprintf(
         "%s in '%s' line: %d",
         $e->getMessage(),
         $e->getFile(),
