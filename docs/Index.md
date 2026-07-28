@@ -17,6 +17,7 @@ a pull request.
 | [🌐 Endpoints](./Endpoints.md) | How to define endpoints and controllers |
 | [🗄️ Database](./Database.md) | Use the built-in database connection manager |
 | [🧩 Middlewares](./Middlewares.md) | How to intercept and modify requests/responses |
+| [📁 Logs](./Logs.md) | Logging |
 
 ## 🛠️ Development Tools
 
