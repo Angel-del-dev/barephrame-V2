@@ -5,6 +5,7 @@ require_once("../Barephrame/autoload.php");
 use Barephrame\Core\Response\Common\InternalServerError;
 use Barephrame\Core\Response\Renderer;
 use Barephrame\Core\Router\Router;
+use Barephrame\Core\Log\Log;
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -16,7 +17,12 @@ try {
     $response = new Router()->redirect();
 } catch(Throwable $e) {
     $response = InternalServerError::send();
-    // TODO Add error to log
+    Log::store('Error', sprintf(
+        "%s in '%s' line: %d",
+        $e->getMessage(),
+        $e->getFile(),
+        $e->getLine()
+    ));
 }
 
 Renderer::send($response);
