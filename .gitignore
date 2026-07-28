@@ -2,3 +2,4 @@ App/*
 Domains/*
 *.ini
 Barephrame/cache/*
+logs/*
