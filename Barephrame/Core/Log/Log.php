@@ -11,6 +11,10 @@ final class Log {
         self::store('Warning', $contents);
     }
 
+    public static function error(string $contents): void {
+        self::store('Error', $contents);
+    }
+
     public static function information(string $contents): void {
         self::store('Information', $contents);
     }
